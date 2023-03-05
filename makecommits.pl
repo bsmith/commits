@@ -39,18 +39,16 @@ sub xy_to_epoch ($x, $y, $year) {
 #     say strftime("%A %Y-%m-%dT%H:%M:%S", gmtime($first_sunday));
 # }
 
-# say strftime("%A %Y-%m-%dT%H:%M:%S", gmtime(xy_to_epoch(1, 0, 2022)));
-
 my $year = 2022;
 my @chars = map $Fixed_5x7{$_}, split //, $year;
 
-my $output_col = 1;
+my $output_col = 2;
 for my $char (@chars) {
     for my $row_idx (0..$#$char) {
         for my $col_idx (0..length($char->[$row_idx])) {
             next unless substr($char->[$row_idx], $col_idx, 1) eq 'X';
-            say strftime("%A %Y-%m-%dT%H:%M:%S", gmtime(xy_to_epoch($output_col + $col_idx, $row_idx, $year)));
+            say strftime("%Y-%m-%dT%H:%M:%S", gmtime(xy_to_epoch($output_col + $col_idx, $row_idx, $year)));
         }
     }
-    $output_col += 8;
+    $output_col += 7;
 }
